@@ -2,6 +2,8 @@ package br.com.fiap.locatech.controllers;
 
 import br.com.fiap.locatech.entities.Veiculo;
 import br.com.fiap.locatech.services.VeiculoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/veiculos")
+@RequestMapping("/v1/veiculos")
+@Tag(name = "Veiculo", description = "Endpoints para gerenciamento de veiculos")
 public class VeiculoController {
 
     private static final Logger logger = LoggerFactory.getLogger(VeiculoController.class);
@@ -23,6 +26,12 @@ public class VeiculoController {
         this.veiculoService = veiculoService;
     }
 
+    @Operation(
+            summary = "Listar veiculos",
+            description = "Endpoint para listar os veiculos disponiveis para aluguel. " +
+                    "É possível paginar os resultados utilizando os parâmetros 'page' e 'size'. " +
+                    "Exemplo: /veiculos?page=1&size=10"
+    )
     @GetMapping
     public ResponseEntity<List<Veiculo>> findAllVeiculos(
             @RequestParam("page") int page,
@@ -33,6 +42,10 @@ public class VeiculoController {
         return ResponseEntity.ok(veiculos);
     }
 
+    @Operation(
+            summary = "Buscar veiculo por id",
+            description = "Endpoint para buscar um veiculo por id. " + "Exemplo: /veiculos/1"
+    )
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Veiculo>> findVeiculo(@PathVariable("id") Long id) {
         logger.info("/veiculos/" + id);
