@@ -16,7 +16,7 @@ public class Aluguel {
     private Long pessoaId;
     private Long veiculoId;
     private String veiculoModelo;
-    private String pessoaCPF;
+    private String pessoaCpf;
     private String pessoaNome;
     private LocalDate dataInicio;
     private LocalDate dataFim;

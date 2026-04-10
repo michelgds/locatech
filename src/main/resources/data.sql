@@ -21,3 +21,18 @@ create table pessoas(
 
 insert into pessoas(nome, cpf, telefone, email)
 values ('Miguel Nastri dos Santos', '34099998902', '11972854715', 'miguel@mail.com');
+
+
+create table alugueis(
+     id bigint auto_increment primary key,
+     pessoa_id bigint not null,
+     veiculo_id bigint not null,
+     data_inicio date,
+     data_fim date,
+     valor_total decimal(10,2),
+     foreign key (pessoa_id) references pessoas(id),
+     foreign key (veiculo_id) references veiculos(id)
+);
+
+insert into alugueis(pessoa_id, veiculo_id, data_inicio, data_fim, valor_total)
+values (1,1,'2025-10-01', '2025-10-15', 1500.00);
