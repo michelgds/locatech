@@ -29,8 +29,8 @@ public class VeiculoReositoryImpl implements VeiculoRepository {
     public List<Veiculo> findAll(int size, int offset) {
         return this.jdbcClient
                 .sql("select * from veiculos limit :size offset :offset ")
-                .param("limit", size)
-                .param("öffset", offset)
+                .param("size", size)
+                .param("offset", offset)
                 .query(Veiculo.class)
                 .list();
     }
@@ -38,11 +38,11 @@ public class VeiculoReositoryImpl implements VeiculoRepository {
     @Override
     public Integer save(Veiculo veiculo) {
         return this.jdbcClient
-                .sql("ïnsert into veiculos(marca, modelo, placa, ano, cor, valor_diaria) values (:marca, :modelo, :placa, :ano, :cor, :valor_diaria)")
+                .sql("insert into veiculos(marca, modelo, placa, ano, cor, valor_diaria) values (:marca, :modelo, :placa, :ano, :cor, :valor_diaria)")
                 .param("marca", veiculo.getMarca())
                 .param("modelo", veiculo.getModelo())
                 .param("placa", veiculo.getPlaca())
-                .param("äno", veiculo.getAno())
+                .param("ano", veiculo.getAno())
                 .param("cor", veiculo.getCor())
                 .param("valor_diaria", veiculo.getValorDiaria())
                 .update();
